@@ -1,31 +1,24 @@
-const path = require('path');
-const express = require('express');
-const app = express();
-// const bodyParser = require('body-parser');
+import dotenv from 'dotenv';
+dotenv.config();
 
-// app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
-// app.use(bodyParser.json()); // parse application/json
+import express from 'express';
+const app = express();
+import bodyParser from 'body-parser';
+
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
 
 // app.engine('html', require('express-es6-template-engine'));
 // app.set('view engine', 'html');
 // app.set('views', 'views');
 app.use(express.static('public'));
 
-// require('./routes')(app);
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve(__dirname, './views/index.html'));
-});
-app.get('/list', function (req, res) {
-  res.sendFile(path.resolve(__dirname, './views/list.html'));
-});
+import { db, } from './db.js';
 
-app.post('/api/login', function (req, res) {
-  res.send({
-    valid: true,
-  });
-});
+import { routes, } from './routes.js';
+routes(app);
 
-app.listen((process.env.PORT || 3000), function () {
+app.listen((process.env.PORT || 3000), () => {
   console.log('App listening on port ' + (process.env.PORT || 3000));
 });
 

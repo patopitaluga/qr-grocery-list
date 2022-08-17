@@ -14,27 +14,18 @@ const app = createApp({
     // 'v-list-item': VListItem,
     // 'v-list-item-title': VListItemTitle
   },*/
-  setup: function(/* props */) {
-    const items = ref([
-      {
-        title: 'Azucar',
-        description: 'Azucar Ledezma 1kg',
-        value: 1,
-        instock: true,
+  setup: (/* props */) => {
+    const items = ref([]);
+
+    fetch('/api/list', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        title: 'Mayonesa',
-        description: 'Hellmans 300g',
-        value: 2,
-        instock: true,
-      },
-      {
-        title: 'Shampoo',
-        description: 'Head and shoulders para cabellos grasos',
-        value: 3,
-        instock: true,
-      },
-    ]);
+    })
+      .then(async(_responseRaw) => {
+        items.value = await _responseRaw.json();
+      });
 
     const itemsInStock = () => items.value.filter((_) => _.instock);
     const itemsToBuy = () => items.value.filter((_) => !_.instock);
@@ -42,7 +33,6 @@ const app = createApp({
     const goToDetail = () => alert(123);
 
     return {
-      items,
       itemsInStock,
       itemsToBuy,
       goToDetail,

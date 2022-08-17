@@ -1,12 +1,18 @@
-require('dotenv').config();
-const webpack = require('webpack');
+import dotenv from 'dotenv';
+dotenv.config();
+import webpack from 'webpack';
 
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import * as path from 'path';
 
-const { VueLoaderPlugin } = require('vue-loader');
+// __dirname missing when using --experimental-modules
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-module.exports = {
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
+
+export default {
   // This will also enable the Vue devtool plugin for Chrome.
   mode: (process.argv[2] === '--watch') ? 'development' : 'production', /* Documentation: https://webpack.js.org/concepts/mode/ */
 
@@ -71,4 +77,9 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: false,
     }),
   ],
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
 };

@@ -2,8 +2,8 @@ import { createApp, ref } from 'vue';
 import { createVuetify } from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
 // import Login from './components/Login.vue';
 
@@ -29,13 +29,16 @@ const app = createApp({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: name,
-          password: password,
+          name: name.value,
+          password: password.value,
         })
       })
         .then(async(_responseRaw) => {
           const responseObject = await _responseRaw.json();
-          window.location.replace('/list');
+          if (responseObject.valid)
+            window.location.replace('/list');
+          else
+            alert(1);
         })
         .catch((_err) => {
           console.log(_err);
