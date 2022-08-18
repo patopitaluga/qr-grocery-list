@@ -30,7 +30,7 @@ const app = createApp({
     const itemsInStock = () => items.value.filter((_) => _.instock);
     const itemsToBuy = () => items.value.filter((_) => !_.instock);
 
-    const goToDetail = () => alert(123);
+    const goToDetail = (_) => window.location.href = `/item/${_}`;
 
     return {
       itemsInStock,

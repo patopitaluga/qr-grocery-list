@@ -67,57 +67,12 @@
 <div id="app">
   <div class="container">
 
-    <v-card
-      class="mx-auto"
-      max-width="300"
-    >
-      <v-list lines="three" select-strategy="multiple">
-        <v-list-subheader>A comprar</v-list-subheader>
-        <template v-for="(_item, _index) in itemsToBuy()">
-          <v-list-item
-            :value="_item.value"
-            @click.stop="goToDetail(_item.id)"
-          >
-            <template v-slot:prepend="{ isActive }">
-              <v-list-item-action start>
-                <v-checkbox-btn
-                  v-model="_item.instock"
-                ></v-checkbox-btn>
-              </v-list-item-action>
-            </template>
+    <h1>{{ title }}</h1>
 
-            <v-list-item-title>{{ _item.title }}</v-list-item-title>
-
-            <v-list-item-subtitle>
-              {{ _item.description }}
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-divider inset></v-divider>
-        </template>
-        <v-list-subheader>En stock</v-list-subheader>
-        <template v-for="(_item, _index) in itemsInStock()">
-          <v-list-item :value="_item.value">
-            <template v-slot:prepend="{ isActive }">
-              <v-list-item-action start>
-                <v-checkbox-btn
-                  v-model="_item.instock"
-                ></v-checkbox-btn>
-              </v-list-item-action>
-            </template>
-
-            <v-list-item-title>{{ _item.title }}</v-list-item-title>
-
-            <v-list-item-subtitle>
-              {{ _item.description }}
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-divider inset></v-divider>
-        </template>
-      </v-list>
-    </v-card>
-
+    <canvas id="qrcodecontainer">
+    </canvas>
   </div>
 </div>
-<script src="/dist/list-page.js"></script>
+<script src="/dist/item-page.js"></script>
 </body>
 </html>

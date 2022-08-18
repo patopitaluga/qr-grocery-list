@@ -12,7 +12,6 @@ const controllerGetItems = async(req, res) => {
   if (!auth.currentUser) return res.status(401).send({
     valid: false,
   });
-;
 
   onValue(ref(db, '/items/' + auth.currentUser.uid), (snapshot) => {
     const items = snapshot.val();
@@ -22,6 +21,7 @@ const controllerGetItems = async(req, res) => {
           id: _eachItemId,
           title: items[_eachItemId].title,
           description: items[_eachItemId].description,
+          instock: items[_eachItemId].instock,
         }
       })
     );

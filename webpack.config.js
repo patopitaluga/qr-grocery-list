@@ -17,8 +17,9 @@ export default {
   mode: (process.argv[2] === '--watch') ? 'development' : 'production', /* Documentation: https://webpack.js.org/concepts/mode/ */
 
   entry: {
-    'list-page': './src/src-list-page.js',
     'login-page': './src/src-login-page.js',
+    'list-page': './src/src-list-page.js',
+    'item-page': './src/src-item-page.js',
 
     'style': './src/style.scss',
   },
